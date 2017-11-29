@@ -1,0 +1,26 @@
+dependencies: \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTJavaScriptLoader.mm \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/ios/build/Build/Products/Debug-iphonesimulator/include/cxxreact/JSBundleType.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTMultipartDataTask.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTMultipartStreamReader.h \
+  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTPerformanceLogger.h
