@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/third-party/folly-2016.09.26.00/folly/Unicode.cpp \
-  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Unicode.h
+  /Users/BryanRattanavong/Desktop/BathroomBanter/node_modules/react-native/third-party/folly-2016.09.26.00/folly/Unicode.cpp \
+  /Users/BryanRattanavong/Desktop/BathroomBanter/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Unicode.h

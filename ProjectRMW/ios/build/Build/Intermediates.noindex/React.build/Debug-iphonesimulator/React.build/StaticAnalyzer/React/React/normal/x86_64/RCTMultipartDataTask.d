@@ -1,4 +1,4 @@
 dependencies: \
-  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTMultipartDataTask.m \
-  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTMultipartDataTask.h \
-  /Users/BryanRattanavong/Documents/GitHub/ProjectRMW/ProjectRMW/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
+  /Users/BryanRattanavong/Desktop/BathroomBanter/node_modules/react-native/React/Base/RCTMultipartDataTask.m \
+  /Users/BryanRattanavong/Desktop/BathroomBanter/node_modules/react-native/React/Base/RCTMultipartDataTask.h \
+  /Users/BryanRattanavong/Desktop/BathroomBanter/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
