@@ -42,9 +42,10 @@ app.get('/listOfBuildings', (request, response) => {
         listOfBuildings.push(element.building);
       }
     });
+    returnObject.listOfBuildings = listOfBuildings;
+    return(returnObject);
   });
-  returnObject.listOfBuildings = listOfBuildings;
-  return(returnObject);
+
 });
 
 // Gets a list of floors for a building
@@ -62,9 +63,52 @@ app.get('/listOfFloors', (request, response) => {
         listOfFloors.push(element.floor);
       }
     });
+    returnObject.listOfFloors = listOfFloors;
+    return(returnObject);
+  });
+});
+
+// Gets a list of washrooms on floor for a building
+// Example Request: http://localhost:3000/listOfWashroomsOnFloor?building=Herzberg+Laboratories&floor=4
+app.get('/listOfWashroomsOnFloor', (request, response) => {
+  var returnObject = {};
+  var listOfWashrooms = [];
+  var sqlQuery = 'SELECT id, room_num FROM washrooms WHERE building LIKE "%' + request.query.building + '%" AND floor = '+ request.query.floor + ';';
+  db.all(sqlQuery,[],(err,rows)=>{
+    if(err)
+      throw err;
+    rows.forEach((element)=>{
+      if(listOfFloors.indexOf(element.room_num) == -1){
+        console.log(request.query.building + ' has Washroom ' + element.room_num + ' on floor ' + request.query.floor);
+        listOfWashrooms.push(element.id);
+      }
+    });
   });
   returnObject.listOfFloors = listOfFloors;
   return(returnObject);
+});
+
+// Gets a specific washroom for a ID
+// Example Request: http://localhost:3000/washroom?id=HP4125
+app.get('/washroom', (request, response) => {
+  var returnObj = {};
+  var sqlQuery = 'SELECT male,female,average_rating,cleanliness,size,toilet_paper,traffic,id FROM washrooms WHERE id LIKE "%' + request.query.id + '%";';
+  db.all(sqlQuery,[],(err,rows)=>{
+    if(err)
+      throw err;
+    rows.forEach((element)=>{
+      returnObj.male = element.male;
+      returnObj.female = element.female;
+      returnObj.average_rating = element.average_rating;
+      returnObj.cleanliness = element.cleanliness;
+      returnObj.size = element.size;
+      returnObj.toilet_paper = element.toilet_paper;
+      returnObj.traffic = element.traffic;
+      returnObj.id = element.id;
+      console.log(returnObj);
+      return(returnObj);
+    });
+  });
 });
 
 // ==================================================================================
