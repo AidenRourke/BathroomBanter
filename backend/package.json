@@ -1,0 +1,22 @@
+{
+  "name": "bathroom-banter-server",
+  "version": "1.0.0",
+  "description": "Backend server for RESTful APIs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GilbertHLam/bathroom-banterBE.git"
+  },
+  "author": "Gilbert Lam, Bryan Rattanavong, Aiden Rourke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GilbertHLam/bathroom-banterBE/issues"
+  },
+  "homepage": "https://github.com/GilbertHLam/bathroom-banterBE#readme",
+  "dependencies": {
+    "mongodb": "2.2.21"
+  }
+}
