@@ -16,6 +16,10 @@
     <female>
       0
     </female>
+    <!-- boolean value for wheelchair accessibility. 1 = true 0 = false NEVER CHANGES -->
+    <wheelchair>
+      0
+    </wheelchair>
     <!-- average rating for the washroom. calculated by the average of the other scores. ranges from 0 - 5 -->
     <average_rating>
       1
@@ -62,6 +66,9 @@
     <female>
       0
     </female>
+    <wheelchair>
+      0
+    </wheelchair>
     <average_rating>
       3.75
     </average_rating>
@@ -98,6 +105,9 @@
     <female>
       1
     </female>
+    <wheelchair>
+      0
+    </wheelchair>
     <average_rating>
       3.75
     </average_rating>

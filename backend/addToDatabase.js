@@ -29,7 +29,7 @@ function writeWashroomsToDatabase(washrooms){
      db.run(sqlString);
 
 	 //create table in the current database
-     sqlString = "CREATE TABLE washrooms (room_num integer, male integer, female integer, average_rating real, cleanliness real, size real , toilet_paper real, traffic real, floor integer,building text, id text);";
+     sqlString = "CREATE TABLE washrooms (room_num integer, male integer, female integer, wheelchair integer, average_rating real, cleanliness real, size real , toilet_paper real, traffic real, floor integer,building text, id text);";
 
      db.run(sqlString);
 
@@ -39,10 +39,10 @@ function writeWashroomsToDatabase(washrooms){
      Prepared statements are pre-compiled as SQL so that one cannot
      insert, or inject, SQL commands for the ? parameters.
      */
-     var stmt = db.prepare("INSERT INTO washrooms (room_num,male,female,average_rating,cleanliness,size,toilet_paper,traffic,floor,building,id) VALUES (?,?,?,?,?,?,?,?,?,?,?);");
+     var stmt = db.prepare("INSERT INTO washrooms (room_num,male,female,wheelchairaverage_rating,cleanliness,size,toilet_paper,traffic,floor,building,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
      for (var i = 0; i < washrooms.length; i++) {
    	    washroom = washrooms[i];
-        stmt.run(washroom.room_num,washroom.male,washroom.female,washroom.average_rating,washroom.cleanliness,washroom.size,washroom.toilet_paper,washroom.traffic,washroom.floor,washroom.building,washroom.id);
+        stmt.run(washroom.room_num,washroom.male,washroom.female,washroom.wheelchair,washroom.average_rating,washroom.cleanliness,washroom.size,washroom.toilet_paper,washroom.traffic,washroom.floor,washroom.building,washroom.id);
      }
      stmt.finalize();
 
@@ -95,6 +95,9 @@ lineReader.eachLine(
        }
        else if(str === '</female>'){
          washroom.female = dataString;
+       }
+       else if(str === '</wheelchair>'){
+         washroom.wheelchair = dataString;
        }
        else if(str === '</average_rating>'){
          washroom.average_rating = dataString;

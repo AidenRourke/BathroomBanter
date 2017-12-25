@@ -1,12 +1,19 @@
 
 // ==================================================================================
 // Declaration of constant variables and imports of node modules
+require('dotenv').config();
 const sqlite3 = require('sqlite3');
 const bodyParser = require('body-parser');
 const http = require('http');
+const https = require('https');
 const express = require('express');
 const PORT = process.env.PORT || 3000
 const app = express();
+
+var googleMapsClient = require('@google/maps').createClient({
+  key: process.env.GOOGLE_KEY,
+});
+
 
 let db = new sqlite3.Database('./washrooms.db',sqlite3.OPEN_READWRITE, (err) => {
   if (err) {
@@ -28,6 +35,24 @@ app.use(bodyParser.json());
 // ==================================================================================
 // API GET Requests
 
+//Gets location name from coordinates
+//Exaple Request: http://localhost:3000/getLocationFromCoord?latitude=45.3820829&longitude=-75.6994726
+app.get('/getLocationFromCoord', (request, response) => {
+  var latitude = request.query.latitude;
+  var longitude = request.query.longitude;
+
+  googleMapsClient.reverseGeocode({
+    latlng: latitude + ',' + longitude,
+    //lng: longitude,
+  }, function(err, response) {
+    if (!err) {
+      console.log(response.json.results);
+    }
+    else{
+      console.log(err);
+    }
+  });
+});
 //Gets a list for all the buildings
 app.get('/listOfBuildings', (request, response) => {
   var returnObject = {};
@@ -35,7 +60,7 @@ app.get('/listOfBuildings', (request, response) => {
   var sqlQuery = 'SELECT building FROM washrooms;';
   db.all(sqlQuery,[],(err,rows)=>{
     if(err)
-      throw err;
+    throw err;
     rows.forEach((element)=>{
       if(listOfBuildings.indexOf(element.building) == -1){
         console.log('Building: ' + element.building);
@@ -56,7 +81,7 @@ app.get('/listOfFloors', (request, response) => {
   var sqlQuery = 'SELECT floor FROM washrooms WHERE building LIKE "%' + request.query.building + '%";';
   db.all(sqlQuery,[],(err,rows)=>{
     if(err)
-      throw err;
+    throw err;
     rows.forEach((element)=>{
       if(listOfFloors.indexOf(element.floor) == -1){
         console.log(request.query.building + ' has Floor: ' + element.floor);
@@ -69,14 +94,14 @@ app.get('/listOfFloors', (request, response) => {
 });
 
 // Gets a list of washrooms on floor for a building
-// Example Request: http://localhost:3000/listOfWashroomsOnFloor?building=Herzberg+Laboratories&floor=4
+// Example Request: http://localhost:3000/listOfWashroomsOnFloor?building=Herzberg+Laboratories&floor=4&sort=average_rating
 app.get('/listOfWashroomsOnFloor', (request, response) => {
   var returnObject = {};
   var listOfWashrooms = [];
-  var sqlQuery = 'SELECT id, room_num FROM washrooms WHERE building LIKE "%' + request.query.building + '%" AND floor = '+ request.query.floor + ';';
+  var sqlQuery = 'SELECT id, room_num FROM washrooms WHERE building LIKE "%' + request.query.building + '%" AND floor = '+ request.query.floor + 'ORDER BY ' + request.query.sort + ' DESC;';
   db.all(sqlQuery,[],(err,rows)=>{
     if(err)
-      throw err;
+    throw err;
     rows.forEach((element)=>{
       if(listOfFloors.indexOf(element.room_num) == -1){
         console.log(request.query.building + ' has Washroom ' + element.room_num + ' on floor ' + request.query.floor);
@@ -95,7 +120,7 @@ app.get('/washroom', (request, response) => {
   var sqlQuery = 'SELECT male,female,average_rating,cleanliness,size,toilet_paper,traffic,id FROM washrooms WHERE id LIKE "%' + request.query.id + '%";';
   db.all(sqlQuery,[],(err,rows)=>{
     if(err)
-      throw err;
+    throw err;
     rows.forEach((element)=>{
       returnObj.male = element.male;
       returnObj.female = element.female;
