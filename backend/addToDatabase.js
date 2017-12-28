@@ -39,7 +39,7 @@ function writeWashroomsToDatabase(washrooms){
     Prepared statements are pre-compiled as SQL so that one cannot
     insert, or inject, SQL commands for the ? parameters.
     */
-    var stmt = db.prepare("INSERT INTO washrooms (room_num,male,female,wheelchairaverage_rating,cleanliness,size,toilet_paper,traffic,floor,building,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
+    var stmt = db.prepare("INSERT INTO washrooms (room_num,male,female,wheelchair,average_rating,cleanliness,size,toilet_paper,traffic,floor,building,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
     for (var i = 0; i < washrooms.length; i++) {
       washroom = washrooms[i];
       stmt.run(washroom.room_num,washroom.male,washroom.female,washroom.wheelchair,washroom.average_rating,washroom.cleanliness,washroom.size,washroom.toilet_paper,washroom.traffic,washroom.floor,washroom.building,washroom.id);
@@ -80,8 +80,8 @@ function writeBuildingsToDatabase(buildings){
     }
     stmt.finalize();
 
-    db.each("SELECT id FROM buildings;", function(err, row) {
-      console.log(row.id);
+    db.each("SELECT name FROM buildings;", function(err, row) {
+      console.log(row.name);
     });
 
   });
@@ -177,7 +177,7 @@ function writeIntoWashrooms(){
       }
     });
   }
-  function writeIntobuildings(){
+  function writeIntoBuildings(){
     var dataString = ''; //data between tags being collected
     var openingTag = ''; //xml opening tag
     var buildings = []; //recipes parsed
@@ -188,7 +188,7 @@ function writeIntoWashrooms(){
     //PRERQUISITE: the file must be validated XML
 
     lineReader.eachLine(
-      'initialData.xml',
+      'initialBuilding.xml',
       function(line, last) {
         str = line.trim();
         if(isOpeningTag(str)){
@@ -223,10 +223,12 @@ function writeIntoWashrooms(){
           //done reading file
           console.log("DONE");
           console.log(JSON.stringify(buildings, null, 4));
-          writebuildingsToFile(buildings);
-          writebuildingsToDatabase(buildings);
+          writeBuildingsToDatabase(buildings);
           console.log('Number of buildings: ' + buildings.length);
           return false; // stop reading
         }
       });
     }
+
+    writeIntoWashrooms();
+    writeIntoBuildings();

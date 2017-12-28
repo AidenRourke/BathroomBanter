@@ -22,6 +22,13 @@ let db = new sqlite3.Database('./washrooms.db',sqlite3.OPEN_READWRITE, (err) => 
   console.log('Connected to the SQLite database.');
 });
 
+let db1 = new sqlite3.Database('./buildings.db',sqlite3.OPEN_READWRITE, (err) => {
+  if (err) {
+    console.error(err.message);
+  }
+  console.log('Connected to the SQLite database.');
+});
+
 // ==================================================================================
 
 
@@ -35,30 +42,56 @@ app.use(bodyParser.json());
 // ==================================================================================
 // API GET Requests
 
-//Gets location name from coordinates
+//Gets closest buildings from Coord
 //Exaple Request: http://localhost:3000/getLocationFromCoord?latitude=45.3820829&longitude=-75.6994726
-app.get('/getLocationFromCoord', (request, response) => {
+app.get('/getBuildingsFromCoord', (request, res) => {
+  var buildingsArray = [];
   var latitude = request.query.latitude;
   var longitude = request.query.longitude;
-
-  googleMapsClient.reverseGeocode({
-    latlng: latitude + ',' + longitude,
-    //lng: longitude,
-  }, function(err, response) {
-    if (!err) {
-      console.log(response.json.results);
-    }
-    else{
-      console.log(err);
-    }
+  var sqlQuery = 'SELECT name, lat, long FROM buildings;';
+  db1.all(sqlQuery,[],(err,rows)=>{
+    if(err)
+    throw err;
+    rows.forEach((element)=>{
+        var building = {name: element.name, lat: element.lat, long: element.long};
+        buildingsArray.push(building);
+      });
+      var coords = [];
+      for (var i = 0; i < buildingsArray.length; i++) {
+        coords.push(buildingsArray[i].lat + ',' + buildingsArray[i].long);
+      }
+      googleMapsClient.distanceMatrix({
+        origins: latitude + ',' + longitude,
+        destinations: coords,
+        mode: 'walking'
+      }, function(err, response) {
+        if (!err) {
+          var arrayOfBuildingObjs = [];
+          for (var i = 0; i < response.json.rows[0].elements.length; i++) {
+              arrayOfBuildingObjs.push({name:buildingsArray[i].name, distance:response.json.rows[0].elements[i].distance.value });
+              console.log(buildingsArray[i].name + ' is ' + response.json.rows[0].elements[i].distance.value + 'm away.');
+          }
+          arrayOfBuildingObjs.sort(function(a, b){return a.distance-b.distance});
+          console.log(arrayOfBuildingObjs);
+          var returnArray = [];
+          for (var i = 0; i < arrayOfBuildingObjs.length; i++) {
+            returnArray.push(arrayOfBuildingObjs[i].name);
+          }
+          return returnArray;
+        }
+        else{
+          console.log(err);
+        }
+      });
   });
+
 });
 //Gets a list for all the buildings
 app.get('/listOfBuildings', (request, response) => {
   var returnObject = {};
   var listOfBuildings = [];
-  var sqlQuery = 'SELECT building FROM washrooms;';
-  db.all(sqlQuery,[],(err,rows)=>{
+  var sqlQuery = 'SELECT name FROM buildings;';
+  db1.all(sqlQuery,[],(err,rows)=>{
     if(err)
     throw err;
     rows.forEach((element)=>{
