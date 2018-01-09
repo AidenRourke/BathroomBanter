@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 import React, { Component } from 'react';
 import {
@@ -39,3 +40,5 @@ const styles = StyleSheet.create({
   }
 });
 export default SearchPage;
+=======
+>>>>>>> parent of a0b633d2... Adding to search
