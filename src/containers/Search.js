@@ -10,7 +10,7 @@ import {
   Image
 } from 'react-native';
 
-class Search extends Component<{}>{
+class SearchPage extends Component<{}>{
   render(){
     return(
       <View style={styles.container}>
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     alignItems:
   }
 });
-export default Search;
+export default SearchPage;
