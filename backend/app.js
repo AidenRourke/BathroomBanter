@@ -97,10 +97,8 @@ app.get('/listOfBuildings', (request, response) => {
     if(err)
     throw err;
     rows.forEach((element)=>{
-      if(listOfBuildings.indexOf(element.building) == -1){
         console.log('Building: ' + element.building);
         listOfBuildings.push(element.building);
-      }
     });
     returnObject.listOfBuildings = listOfBuildings;
     response.json(returnObject);
@@ -133,19 +131,20 @@ app.get('/listOfFloors', (request, response) => {
 app.get('/listOfWashroomsOnFloor', (request, response) => {
   var returnObject = {};
   var listOfWashrooms = [];
-  var sqlQuery = 'SELECT id, room_num FROM washrooms WHERE building LIKE "%' + request.query.building + '%" AND floor = '+ request.query.floor + 'ORDER BY ' + request.query.sort + ' DESC;';
+  var sqlQuery = 'SELECT id, room_num FROM washrooms WHERE building LIKE "%' + request.query.building + '%" AND floor = "'+ request.query.floor + '" ORDER BY ' + request.query.sort + ' DESC;';
   db.all(sqlQuery,[],(err,rows)=>{
     if(err)
     throw err;
     rows.forEach((element)=>{
-      if(listOfFloors.indexOf(element.room_num) == -1){
+      if(listOfWashrooms.indexOf(element.room_num) == -1){
         console.log(request.query.building + ' has Washroom ' + element.room_num + ' on floor ' + request.query.floor);
         listOfWashrooms.push(element.id);
       }
     });
-  });
-  returnObject.listOfFloors = listOfFloors;
+	  returnObject.listOfWashrooms = listOfWashrooms;
   response.json(returnObject);
+  });
+
 });
 
 // Gets a specific washroom for a ID
