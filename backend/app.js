@@ -46,6 +46,7 @@ app.use(bodyParser.json());
 //Exaple Request: http://localhost:3000/getLocationFromCoord?latitude=45.3820829&longitude=-75.6994726
 app.get('/getBuildingsFromCoord', (request, res) => {
   var buildingsArray = [];
+  var returnObj = {};
   var latitude = request.query.latitude;
   var longitude = request.query.longitude;
   var sqlQuery = 'SELECT name, lat, long FROM buildings;';
@@ -77,7 +78,8 @@ app.get('/getBuildingsFromCoord', (request, res) => {
           for (var i = 0; i < arrayOfBuildingObjs.length; i++) {
             returnArray.push(arrayOfBuildingObjs[i].name);
           }
-          return returnArray;
+		  returnObj.listOfBuildings = returnArray;
+          res.json(returnObj);
         }
         else{
           console.log(err);
@@ -101,7 +103,7 @@ app.get('/listOfBuildings', (request, response) => {
       }
     });
     returnObject.listOfBuildings = listOfBuildings;
-    return(returnObject);
+    response.json(returnObject);
   });
 
 });
@@ -122,7 +124,7 @@ app.get('/listOfFloors', (request, response) => {
       }
     });
     returnObject.listOfFloors = listOfFloors;
-    return(returnObject);
+    response.json(returnObject);
   });
 });
 
@@ -143,7 +145,7 @@ app.get('/listOfWashroomsOnFloor', (request, response) => {
     });
   });
   returnObject.listOfFloors = listOfFloors;
-  return(returnObject);
+  response.json(returnObject);
 });
 
 // Gets a specific washroom for a ID
@@ -164,7 +166,7 @@ app.get('/washroom', (request, response) => {
       returnObj.traffic = element.traffic;
       returnObj.id = element.id;
       console.log(returnObj);
-      return(returnObj);
+      response.json(returnObj);
     });
   });
 });
