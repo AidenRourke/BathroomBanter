@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const https = require('https');
 const express = require('express');
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 const app = express();
 
 var googleMapsClient = require('@google/maps').createClient({
